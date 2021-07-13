@@ -1,7 +1,7 @@
 <template>
     <div class="login-container">
         <el-form ref="form" :rules="rules" :model="form" label-width="80px" class="login-form">
-            <h2 class="login-title">吹牛逼管理系统</h2>
+            <h2 class="login-title">管理系统</h2>
             <el-form-item label="用户名" prop="username">
                 <el-input v-model="form.username"></el-input>
             </el-form-item>
@@ -27,11 +27,11 @@
                 rules: {
                     username: [
                         {required: true, message: "用户名不能为空", trigger: 'blur'},
-                        {min: 3, max: 10, message: "用户名8-5位", trigger: 'blur'}
+                        {min: 3, max: 10, message: "用户名3-10位", trigger: 'blur'}
                     ],
                     password: [
                         {required: true, message: "密码不能为空", trigger: 'blur'},
-                        {min: 3, max: 10, message: "密码3-5位", trigger: 'blur'}
+                        {min: 3, max: 10, message: "密码3-10位", trigger: 'blur'}
                     ]
                 }
             };
@@ -42,6 +42,12 @@
                     // console.log(valid) 验证通过为true，有一个不通过就是false
                     if (valid) {
                         // 通过的逻辑
+                        /*this.axios.get("http://localhost:9000/api/media/getPlayUrl").then((response) =>{
+                            console.log(response);
+                        })*/
+                        this.$http.get('http://localhost:9000/api/media/getPlayUrl').then(response => {
+                            console.log(response)
+                        })
                         this.$message({
                             type:"error",
                             message:"登录失败"
